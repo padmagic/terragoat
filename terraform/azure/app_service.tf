@@ -48,7 +48,7 @@ resource azurerm_app_service "app-service2" {
   https_only          = true
 
   auth_settings {
-    enabled = false
+    enabled = true
   }
   tags = {
     git_commit           = "5c6b5d60a8aa63a5d37e60f15185d13a967f0542"
@@ -59,6 +59,20 @@ resource azurerm_app_service "app-service2" {
     git_org              = "bridgecrewio"
     git_repo             = "terragoat"
     yor_trace            = "ec8295ab-af68-4cff-b0f1-b0cf5eaf1b75"
+  }
+  site_config {
+    http2_enabled = true
+    dotnet_framework_version = "v6.0"
+    ftps_state = "Disabled"
+  }
+  logs {
+    detailed_error_messages_enabled = true
+    failed_request_tracing_enabled = true
+  }
+  identity = true
+  client_cert_enabled = true
+  storage_account {
+    type = "AzureFiles"
   }
 }
 
